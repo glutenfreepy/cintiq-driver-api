@@ -1,5 +1,5 @@
 # web files for scraping
-.pem
+*.pem
 
 # IDE
 .idea
