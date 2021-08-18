@@ -1,2 +1,3 @@
 # cintiq-driver-api
-scrape and collect the latest wacom cintiq driver versions
+An api for getting the latest three latest wacom display driver versions.
+For automating prep of macs for new artists being onboarded
