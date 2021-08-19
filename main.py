@@ -1,5 +1,5 @@
 from decouple import config
-from deta import Deta
+from deta import Deta, App
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
@@ -7,7 +7,7 @@ from wacom import get_latest_driver
 
 DB_NAME = config('DB_NAME')
 
-app = FastAPI()
+app = App(FastAPI())
 deta = Deta()
 db = deta.Base(DB_NAME)
 
