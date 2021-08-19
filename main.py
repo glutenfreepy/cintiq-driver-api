@@ -5,10 +5,11 @@ from pydantic import BaseModel
 
 from wacom import get_latest_driver
 
+DETA_PROJECT_KEY = config('DETA_PROJECT_KEY')
 DB_NAME = config('DB_NAME')
 
 app = App(FastAPI())
-deta = Deta()
+deta = Deta(DETA_PROJECT_KEY)
 db = deta.Base(DB_NAME)
 
 
