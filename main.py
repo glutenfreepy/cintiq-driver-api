@@ -3,7 +3,7 @@ from deta import Deta
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
-from wacom import get_driver_page
+from wacom import get_latest_driver
 
 DB_NAME = config('DB_NAME')
 
@@ -30,3 +30,8 @@ def get_driver(key: str):
     if driver is None:
         raise HTTPException(status_code=404, detail="Driver not found")
     return driver
+
+
+@app.lib.cron()
+def get_and_load_drivers(event):
+    get_latest_driver()

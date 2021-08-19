@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 from decouple import config
-from deta import app
 import requests
 
 
@@ -25,8 +24,7 @@ def get_driver_page():
     return driver_page.find_all('a', attrs={'class': 'modal__drivers-btn'})
 
 
-@app.lib.cron()
-def get_latest_driver(event):
+def get_latest_driver():
     result = get_driver_page()
     mac_driver = result[0]
     mac_download_link = mac_driver.get('data-download-link')
@@ -36,5 +34,5 @@ def get_latest_driver(event):
     })
 
 
-# if __name__ == "__main__":
-#     get_latest_driver()
+if __name__ == "__main__":
+    get_latest_driver()
