@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from decouple import config
+from deta import Deta
 import requests
 
 
