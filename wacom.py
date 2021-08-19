@@ -1,11 +1,16 @@
 from bs4 import BeautifulSoup
 from decouple import config
+from deta import app
 import requests
 
 
 DRIVERS_URL = 'https://www.wacom.com/en-us/support/product-support/drivers'
 HEADERS = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36'}
 TRUST_STORE = config('TRUST_STORE')
+DB_NAME = config('DB_NAME')
+
+deta = Deta()
+db = deta.Base(DB_NAME)
 
 
 def get_soup():
@@ -20,14 +25,16 @@ def get_driver_page():
     return driver_page.find_all('a', attrs={'class': 'modal__drivers-btn'})
 
 
-def get_latest_drivers():
+@app.lib.cron()
+def get_latest_driver(event):
     result = get_driver_page()
-    # TODO: loop this to get 0(latest), 1(next latest, and 2
     mac_driver = result[0]
     mac_download_link = mac_driver.get('data-download-link')
-    print(mac_download_link)
-    return mac_download_link
+    db.put({
+        "link": mac_download_link,
+        "key": "1"
+    })
 
 
-if __name__ == "__main__":
-    get_latest_drivers()
+# if __name__ == "__main__":
+#     get_latest_driver()

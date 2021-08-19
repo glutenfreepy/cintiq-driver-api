@@ -1,31 +1,32 @@
+from decouple import config
+from deta import Deta
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from typing import List
+
+from wacom import get_driver_page
+
+DB_NAME = config('DB_NAME')
 
 app = FastAPI()
+deta = Deta()
+db = deta.Base(DB_NAME)
 
 
 class Driver(BaseModel):
-    version: str
-    download_link: str
-    tags: List[str] = []
-
-
-drivers = {
-    1: {"version": "6.2.2", "download_link": "https://some-download.com/6.2.2"},
-    2: {"version": "5.0.0", "download_link": "https://some-download.com/5.0.0"},
-    3: {"version": "4.0.0", "download_link": "https://some-download.com/4.0.0"},
-}
+    key: str
+    link: str
 
 
 @app.get("/wacom-drivers", status_code=200)
 def get_drivers():
+    response = db.fetch()
+    drivers = response.items
     return drivers
 
 
-@app.get("/wacom-drivers/{driver_id}", status_code=200)
-def get_driver(driver_id: int):
-    driver = drivers.get(driver_id)
+@app.get("/wacom-drivers/{key}", status_code=200)
+def get_driver(key: str):
+    driver = drivers.get(key)
     if driver is None:
         raise HTTPException(status_code=404, detail="Driver not found")
     return driver
