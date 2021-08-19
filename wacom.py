@@ -6,7 +6,6 @@ import requests
 
 DRIVERS_URL = 'https://www.wacom.com/en-us/support/product-support/drivers'
 HEADERS = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36'}
-# TRUST_STORE = 'my-trust-store.pem'
 DETA_PROJECT_KEY = config('DETA_PROJECT_KEY')
 DB_NAME = config('DB_NAME')
 
