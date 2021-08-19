@@ -27,13 +27,15 @@ def get_driver_page():
 
 
 def get_latest_driver():
+    versions = [0, 1, 2]
     result = get_driver_page()
-    mac_driver = result[0]
-    mac_download_link = mac_driver.get('data-download-link')
-    db.put({
-        "link": mac_download_link,
-        "key": "1"
-    })
+    for version in versions:
+        mac_driver = result[version]
+        mac_download_link = mac_driver.get('data-download-link')
+        db.put({
+            "link": mac_download_link,
+            "key": f"{version + 1}"
+        })
 
 
 if __name__ == "__main__":
