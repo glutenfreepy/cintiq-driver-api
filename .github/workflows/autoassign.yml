@@ -1,6 +1,6 @@
 # This is a basic workflow that is manually triggered
 
-name: Assign new Issues to me
+name: Auto-assign new Issues
 
 # trigger when new issue is opened
 on:
