@@ -1,0 +1,18 @@
+# This is a basic workflow that is manually triggered
+
+name: Assign new Issues to me
+
+# trigger when new issue is opened
+on:
+  issues:
+    types: [opened]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  auto-assign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Auto-assign new issues'
+        uses: pozil/auto-assign-issue@v1
+        with:
+          assignees: glutenfreepy
