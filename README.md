@@ -9,4 +9,4 @@ https://cns1.deta.dev/wacom-drivers/1
 
 (Simply subsitute 2 or 3, in place of 1, to get the second or third latest drivers respectively.
 
-**The Wacom driver download page is checked, and database updated everyday at 9am PST*
+**The Wacom driver download page is scraped everyday at 9am PST for the latest cintiq drivers*
